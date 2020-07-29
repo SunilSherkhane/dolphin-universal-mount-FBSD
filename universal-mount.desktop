@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+Icon=media-mount
+MimeType=all/allfiles;
+Actions=mount;unmount;
+
+
+[Desktop Action mount]
+Name=Mount file
+Icon=media-mount
+Exec=$(tmp_mnt="/tmp/mnt-$(echo -n "%f" | sha256sum | awk '{print $1}')" && mkdir -p "$tmp_mnt" && $(pkexec mount -o loop "%f" "$tmp_mnt" && xdg-open "$tmp_mnt") || kdialog --error "Cannot mount, you can try to mount it manually:\n\nsudo mount -o loop \\""%f"\\" \\""$tmp_mnt"\\"")
+
+[Desktop Action unmount]
+Name=Unmount file
+Icon=media-eject
+Exec=$(tmp_mnt="/tmp/mnt-$(echo -n "%f" | sha256sum | awk '{print $1}')" && $(pkexec umount "$tmp_mnt" && rm -r "$tmp_mnt") || kdialog --error "Cannot unmount, you can try to unmount it manually:\n\nsudo umount \\""$tmp_mnt"\\"")
