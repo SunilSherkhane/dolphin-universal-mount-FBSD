@@ -9,9 +9,9 @@ Actions=mount;unmount;
 [Desktop Action mount]
 Name=Mount file
 Icon=media-mount
-Exec=$(tmp_mnt="/tmp/mnt-$(echo -n "%f" | sha256sum | awk '{print $1}')" && mkdir -p "$tmp_mnt" && $(pkexec mount -o loop "%f" "$tmp_mnt" && xdg-open "$tmp_mnt") || kdialog --error "Cannot mount, you can try to mount it manually:\n\nsudo mount -o loop \\""%f"\\" \\""$tmp_mnt"\\"")
+Exec=$(mnt_file="$(basename "%f")" && mnt_dir="/tmp/${mnt_file}-$(echo -n "%f" | sha256sum | head -c 8)" && mkdir -p "$mnt_dir" && $(pkexec mount -o loop "%f" "$mnt_dir" && xdg-open "$mnt_dir") || kdialog --error "Cannot mount, you can try to mount it manually:\n\nsudo mount -o loop \\""%f"\\" \\""$mnt_dir"\\"")
 
 [Desktop Action unmount]
 Name=Unmount file
 Icon=media-eject
-Exec=$(tmp_mnt="/tmp/mnt-$(echo -n "%f" | sha256sum | awk '{print $1}')" && $(pkexec umount "$tmp_mnt" && rm -r "$tmp_mnt") || kdialog --error "Cannot unmount, you can try to unmount it manually:\n\nsudo umount \\""$tmp_mnt"\\"")
+Exec=$(mnt_file="$(basename "%f")" && mnt_dir="/tmp/${mnt_file}-$(echo -n "%f" | sha256sum | head -c 8)" && $(pkexec umount "$mnt_dir" && rm -r "$mnt_dir") || kdialog --error "Cannot unmount, you can try to unmount it manually:\n\nsudo umount \\""$mnt_dir"\\"")
