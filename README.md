@@ -6,3 +6,5 @@
 - Unmount previously mounted file using "Unmount file".
 
 ![Screenshot](screenshot.png)
+
+![Screenshot](screenshot-2.png)
