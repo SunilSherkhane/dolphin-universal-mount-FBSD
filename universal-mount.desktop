@@ -8,10 +8,12 @@ Actions=mount;unmount;
 
 [Desktop Action mount]
 Name=Mount file
+Name[nl]=Bestand aankoppelen
 Icon=media-mount
 Exec=(mnt_file="$(basename "%f")" && mnt_dir="/tmp/${mnt_file}-$(echo -n "%f" | sha256sum | head -c 8)" && mkdir -p "$mnt_dir" && (pkexec mount -o loop "%f" "$mnt_dir" && xdg-open "$mnt_dir") || kdialog --error "Cannot mount, you can try to mount it manually:\n\nsudo mount -o loop \\""%f"\\" \\""$mnt_dir"\\"")
 
 [Desktop Action unmount]
 Name=Unmount file
+Name[nl]=Bestand afkoppelen
 Icon=media-eject
 Exec=(mnt_file="$(basename "%f")" && mnt_dir="/tmp/${mnt_file}-$(echo -n "%f" | sha256sum | head -c 8)" && (pkexec umount "$mnt_dir" && rm -r "$mnt_dir") || kdialog --error "Cannot unmount, you can try to unmount it manually:\n\nsudo umount \\""$mnt_dir"\\"")
