@@ -11,10 +11,12 @@ X-KDE-Submenu=Mount/unmount iso image
 [Desktop Action unmount]
 Name=Unmount
 Icon=media-eject
-Exec=sudo umount /tmp
+Exec=sudo umount /mnt
 
 [Desktop Action mount]
 Name=Mount
 Icon=media-mount
-Exec=sudo mdconfig -a -t vnode -f %f && sudo mount -t cd9660 /dev/md0 /tmp
+Exec=sudo mdconfig -a -t vnode -f %f && sudo mount_cd9660 /dev/md0 /mnt || sudo mount_udf /dev/md0 /mnt || sudo mount_mdf /dev/md0 /mnt
+
+
 
