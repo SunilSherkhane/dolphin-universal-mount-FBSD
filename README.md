@@ -1,4 +1,4 @@
-## Dolphin service menu: Universal mounter / unmounter
+## Dolphin service menu: Universal mounter / unmounter for KDE-Plasma on FreeBSD 
 
 - Mount UDF, MDF and CD9660 formatfile using "Mount file" for FreeBSD by using mdconfig.
   - After mounting it opens created mount point in your file manager.  
